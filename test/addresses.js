@@ -191,7 +191,8 @@ describe('Addresses', function() {
       'bb0ec3b96209fac9529570ea6f83a86af2cceedde4aaf2bfcc4796680d23f1c7',
       '01f700df84c466f2a389440e5eeacdc47d04f380c39e5d19dce2ce91a11ecba3'
     ]
-  };
+  }; 
+
   describe('/addr/:addr', function() {
     var node = {
       getAddressSummary: sinon.stub().callsArgWith(2, null, summary)
@@ -717,6 +718,7 @@ describe('Addresses', function() {
       addresses.multitxs(req, res);
     });
   });
+
   describe('#_getTransformOptions', function() {
     it('will return false with value of string "0"', function() {
       var node = {};
@@ -769,5 +771,49 @@ describe('Addresses', function() {
         noSpent: true
       });
     });
+  }); 
+  
+  describe('#_populateMulsignValid', function() {
+    it('get only multisign valids', function() {
+      var multisign=[
+        {
+            pub_keys:[
+                "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec", 
+                "025dd3c2b5465b2f1c9a8b3b51016269a43e6d93dadfd9416c36d83394fc4f6b4b"],
+            reqSigs: 2
+        },
+        {
+            pub_keys:[
+             "03a83a6de49b6ae1ec89d4734d31e2e6eaf432ea4bfb6b76df6a5759c37cfbdbcc",
+             "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+            reqSigs: 2
+        },	
+        {
+          pub_keys:[ 
+           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+          reqSigs: 2
+        },
+        {
+          pub_keys:[ 
+            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+          reqSigs: 3
+        },
+        { 
+          reqSigs: 1
+        },
+        {
+          pub_keys:[ 
+            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"]
+        },
+      ] 
+      var node = {};
+      var addresses = new AddressController(node);
+      addresses._populateMulsignValid(multisign).then(function(results){
+        should(results.length).be.exactly(2);  
+      });
+    });
   });
+
 });
