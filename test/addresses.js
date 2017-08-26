@@ -772,50 +772,7 @@ describe('Addresses', function() {
       });
     });
   }); 
-  
-  describe('#_populateMulsignValid', function() {
-    it('get only multisign valids', function() {
-      var multisign=[
-        {
-            pub_keys:[
-                "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec", 
-                "025dd3c2b5465b2f1c9a8b3b51016269a43e6d93dadfd9416c36d83394fc4f6b4b"],
-            reqSigs: 2
-        },
-        {
-            pub_keys:[
-             "03a83a6de49b6ae1ec89d4734d31e2e6eaf432ea4bfb6b76df6a5759c37cfbdbcc",
-             "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-            reqSigs: 2
-        },	
-        {
-          pub_keys:[ 
-           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-          reqSigs: 2
-        },
-        {
-          pub_keys:[ 
-            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
-            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-          reqSigs: 3
-        },
-        { 
-          reqSigs: 1
-        },
-        {
-          pub_keys:[ 
-            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
-            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"]
-        },
-      ] 
-      var node = {};
-      var addresses = new AddressController(node);
-      addresses._populateMulsignValid(multisign).then(function(results){
-        should(results.length).be.exactly(2);  
-      });
-    });
-  });
-
+ 
   describe('#_processingBulk', function() {
     var bulk = [
       {
