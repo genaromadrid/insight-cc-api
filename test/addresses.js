@@ -772,7 +772,6 @@ describe('Addresses', function() {
       });
     });
   }); 
-  
  
   describe('#_processingBulk', function() {
     var bulk = [ 
