@@ -897,7 +897,5 @@ describe('Addresses', function() {
           return done(e);
         });
     });  
-  });
-
-  
+  });  
 });
