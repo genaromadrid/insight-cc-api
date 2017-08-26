@@ -191,7 +191,8 @@ describe('Addresses', function() {
       'bb0ec3b96209fac9529570ea6f83a86af2cceedde4aaf2bfcc4796680d23f1c7',
       '01f700df84c466f2a389440e5eeacdc47d04f380c39e5d19dce2ce91a11ecba3'
     ]
-  };
+  }; 
+
   describe('/addr/:addr', function() {
     var node = {
       getAddressSummary: sinon.stub().callsArgWith(2, null, summary)
@@ -717,6 +718,7 @@ describe('Addresses', function() {
       addresses.multitxs(req, res);
     });
   });
+
   describe('#_getTransformOptions', function() {
     it('will return false with value of string "0"', function() {
       var node = {};
@@ -769,10 +771,11 @@ describe('Addresses', function() {
         noSpent: true
       });
     });
-  });
-
+  }); 
+  
+ 
   describe('#_processingBulk', function() {
-    var bulk = [
+    var bulk = [ 
       {
           pub_keys:[
               "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec", 
@@ -804,13 +807,19 @@ describe('Addresses', function() {
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"]
       },
+      {
+        pub_keys: 
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        reqSigs: 3
+      },
     ] 
     var node = {};
     var addresses = new AddressController(node);
 
     it('should get multisigns invalid', done => {  
       addresses._processingBulk(bulk).then(function(container){
-        should(container.multisign_not_valid.length).be.exactly(4);  
+        should(container.multisign_not_valid.length).be.exactly(5); 
+        should(container.multisign_not_valid[4].error).be.exactly("incorrect format pub_keys must be Array and reqSigs integer"); 
         should(container.multisign_valid.length).be.exactly(2);  
         done()
       }).catch(function(e){
@@ -819,7 +828,7 @@ describe('Addresses', function() {
     });
 
     it('should get multisigns valid', done => {  
-        bulk.splice(2,4);
+        bulk.splice(2,5);
         addresses._processingBulk(bulk).then(function(container){
           should(container.multisign_not_valid.length).be.exactly(0);  
           should(container.multisign_valid.length).be.exactly(2);  
