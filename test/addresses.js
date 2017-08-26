@@ -867,13 +867,19 @@ describe('Addresses', function() {
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"]
       },
+      {
+        pub_keys: 
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        reqSigs: 3
+      },
     ] 
     var node = {};
     var addresses = new AddressController(node);
 
     it('should get multisigns invalid', done => {  
       addresses._processingBulk(bulk).then(function(container){
-        should(container.multisign_not_valid.length).be.exactly(4);  
+        should(container.multisign_not_valid.length).be.exactly(5); 
+        should(container.multisign_not_valid[4].error).be.exactly("incorrect format pub_keys must be Array and reqSigs integer"); 
         should(container.multisign_valid.length).be.exactly(2);  
         done()
       }).catch(function(e){
@@ -882,7 +888,7 @@ describe('Addresses', function() {
     });
 
     it('should get multisigns valid', done => {  
-        bulk.splice(2,4);
+        bulk.splice(2,5);
         addresses._processingBulk(bulk).then(function(container){
           should(container.multisign_not_valid.length).be.exactly(0);  
           should(container.multisign_valid.length).be.exactly(2);  
