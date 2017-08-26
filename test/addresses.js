@@ -820,6 +820,11 @@ describe('Addresses', function() {
         reqSigs: 3,
         index: 5
       },
+      {
+        pub_keys: 
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        reqSigs: 3
+      },
     ] 
     var node = {};
     var addresses = new AddressController(node);
