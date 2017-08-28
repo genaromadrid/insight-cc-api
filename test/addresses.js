@@ -779,32 +779,44 @@ describe('Addresses', function() {
           pub_keys:[
               "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec", 
               "025dd3c2b5465b2f1c9a8b3b51016269a43e6d93dadfd9416c36d83394fc4f6b4b"],
-          reqSigs: 2
+          reqSigs: 2,
+          index: 1
       },
       {
           pub_keys:[
            "03a83a6de49b6ae1ec89d4734d31e2e6eaf432ea4bfb6b76df6a5759c37cfbdbcc",
            "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-          reqSigs: 2
+          reqSigs: 2,
+          index: 0
       },  
       {
         pub_keys:[ 
          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-        reqSigs: 2
+        reqSigs: 2,
+        index: 3
       },
       {
         pub_keys:[ 
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-        reqSigs: 3
+        reqSigs: 3,
+        index: 2
       },
       { 
-        reqSigs: 1
+        reqSigs: 1,
+        index: 6
       },
       {
         pub_keys:[ 
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
-          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"]
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+          index: 4
+      },
+      {
+        pub_keys: 
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        reqSigs: 3,
+        index: 5
       },
     ] 
     var node = {};
@@ -812,7 +824,9 @@ describe('Addresses', function() {
 
     it('should get multisigns invalid', done => {  
       addresses._processingBulk(bulk).then(function(container){
-        should(container.multisign_not_valid.length).be.exactly(4);  
+        should(container.multisign_not_valid.length).be.exactly(5); 
+        should(container.multisign_not_valid[4].error).be.exactly("incorrect format pub_keys must be Array and reqSigs integer"); 
+        should(container.multisign_not_valid[4].index).be.exactly(5); 
         should(container.multisign_valid.length).be.exactly(2);  
         done()
       }).catch(function(e){
@@ -825,6 +839,8 @@ describe('Addresses', function() {
         addresses._processingBulk(bulk).then(function(container){
           should(container.multisign_not_valid.length).be.exactly(0);  
           should(container.multisign_valid.length).be.exactly(2);  
+          should(container.multisign_valid[0].index).be.exactly(0);
+          should(container.multisign_valid[1].index).be.exactly(1); 
           done()
         }).catch(function(e){
           return done(e);
