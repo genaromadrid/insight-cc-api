@@ -2,10 +2,11 @@
 
 process.env.NODE_ENV = 'test';
 
+var config = require('config'); 
+var bitcore = require(config.bitcoinLib);
 var should = require('should');
 var sinon = require('sinon');
 var MessagesController = require('../lib/messages');
-var bitcore = require('litecore-lib');
 var _ = require('lodash');
 
 describe('Messages', function() {
