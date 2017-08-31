@@ -1,5 +1,6 @@
 {
   "firstColoredBlock": 1227000,
   "DBHost": "mongodb://localhost/insignt-lite-cc-dev",
-  "network":"litecoin-testnet"
+  "network":"litecoin-testnet",
+  "bitcoinLib":"bitcore-lib"
 }
