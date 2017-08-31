@@ -2,9 +2,10 @@
 
 process.env.NODE_ENV = 'test';
 
+var config = require('config');
+var bitcore = require(config.bitcoinLib);
 var should = require('should');
-var sinon = require('sinon');
-var bitcore = require('litecore-lib');
+var sinon = require('sinon'); 
 var TxController = require('../lib/transactions');
 var _ = require('lodash');
 
