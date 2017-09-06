@@ -181,7 +181,7 @@ var utxos = [
   }
 ];
 
-describe('Addresses', function() {
+describe('Addresses', function () {
   var summary = {
     balance: 0,
     totalReceived: 2782729129,
@@ -193,9 +193,9 @@ describe('Addresses', function() {
       'bb0ec3b96209fac9529570ea6f83a86af2cceedde4aaf2bfcc4796680d23f1c7',
       '01f700df84c466f2a389440e5eeacdc47d04f380c39e5d19dce2ce91a11ecba3'
     ]
-  }; 
+  };
 
-  describe('/addr/:addr', function() {
+  describe('/addr/:addr', function () {
     var node = {
       getAddressSummary: sinon.stub().callsArgWith(2, null, summary)
     };
@@ -206,7 +206,7 @@ describe('Addresses', function() {
       query: {}
     };
 
-    it('should have correct data', function(done) {
+    it('should have correct data', function (done) {
       var insight = {
         'addrStr': 'mkPvAKZ2rar6qeG3KjBtJHHMSP1wFZH7Er',
         'balance': 0,
@@ -226,7 +226,7 @@ describe('Addresses', function() {
       };
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           should(data).eql(insight);
           done();
         }
@@ -234,7 +234,7 @@ describe('Addresses', function() {
       addresses.show(req, res);
     });
 
-    it('handle error', function() {
+    it('handle error', function () {
       var testnode = {};
       testnode.log = {};
       testnode.log.error = sinon.stub();
@@ -247,7 +247,7 @@ describe('Addresses', function() {
         addr: 'mkPvAKZ2rar6qeG3KjBtJHHMSP1wFZH7Er'
       };
       var send = sinon.stub();
-      var status = sinon.stub().returns({send: send});
+      var status = sinon.stub().returns({ send: send });
       var res = {
         status: status
       };
@@ -258,11 +258,11 @@ describe('Addresses', function() {
       send.args[0][0].should.equal('test');
     });
 
-    it('/balance', function(done) {
+    it('/balance', function (done) {
       var insight = 0;
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           should(data).eql(insight);
           done();
         }
@@ -270,11 +270,11 @@ describe('Addresses', function() {
       addresses.balance(req, res);
     });
 
-    it('/totalReceived', function(done) {
+    it('/totalReceived', function (done) {
       var insight = 2782729129;
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           should(data).eql(insight);
           done();
         }
@@ -283,11 +283,11 @@ describe('Addresses', function() {
       addresses.totalReceived(req, res);
     });
 
-    it('/totalSent', function(done) {
+    it('/totalSent', function (done) {
       var insight = 2782729129;
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           should(data).eql(insight);
           done();
         }
@@ -296,11 +296,11 @@ describe('Addresses', function() {
       addresses.totalSent(req, res);
     });
 
-    it('/unconfirmedBalance', function(done) {
+    it('/unconfirmedBalance', function (done) {
       var insight = 0;
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           should(data).eql(insight);
           done();
         }
@@ -310,8 +310,8 @@ describe('Addresses', function() {
     });
   });
 
-  describe('/addr/:addr/utxo', function() {
-    it('should have correct data', function(done) {
+  describe('/addr/:addr/utxo', function () {
+    it('should have correct data', function (done) {
       var insight = [
         {
           'address': 'mzkD4nmQ8ixqxySdBgsXTpgvAMK5iRZpNK',
@@ -349,7 +349,7 @@ describe('Addresses', function() {
       };
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           var merged = _.merge(data, todos);
           should(merged).eql(insight);
           done();
@@ -360,8 +360,8 @@ describe('Addresses', function() {
     });
   });
 
-  describe('/addrs/:addrs/utxo', function() {
-    it('should have the correct data', function(done) {
+  describe('/addrs/:addrs/utxo', function () {
+    it('should have the correct data', function (done) {
       var insight = [
         {
           'address': 'mzkD4nmQ8ixqxySdBgsXTpgvAMK5iRZpNK',
@@ -413,7 +413,7 @@ describe('Addresses', function() {
       };
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           var merged = _.merge(data, todos);
           should(merged).eql(insight);
           done();
@@ -424,8 +424,8 @@ describe('Addresses', function() {
     });
   });
 
-  describe('/addrs/:addrs/txs', function() {
-    it('should have correct data', function(done) {
+  describe('/addrs/:addrs/txs', function () {
+    it('should have correct data', function (done) {
       var insight = {
         'totalItems': 1,
         'from': 0,
@@ -573,7 +573,7 @@ describe('Addresses', function() {
       };
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           var merged = _.merge(data, todos);
           should(merged).eql(insight);
           done();
@@ -582,7 +582,7 @@ describe('Addresses', function() {
 
       addresses.multitxs(req, res);
     });
-    it('should have trimmed data', function(done) {
+    it('should have trimmed data', function (done) {
       var insight = {
         'totalItems': 1,
         'from': 0,
@@ -705,12 +705,12 @@ describe('Addresses', function() {
 
       var req = {
         addrs: 'mzkD4nmQ8ixqxySdBgsXTpgvAMK5iRZpNK,moZY18rGNmh4YCPeugtGW46AkkWMQttBUD',
-        query: {noSpent: '1', noScriptSig: '1', noAsm: '1'},
+        query: { noSpent: '1', noScriptSig: '1', noAsm: '1' },
         body: {}
       };
 
       var res = {
-        jsonp: function(data) {
+        jsonp: function (data) {
           var merged = _.merge(data, todos);
           should(merged).eql(insight);
           done();
@@ -721,8 +721,8 @@ describe('Addresses', function() {
     });
   });
 
-  describe('#_getTransformOptions', function() {
-    it('will return false with value of string "0"', function() {
+  describe('#_getTransformOptions', function () {
+    it('will return false with value of string "0"', function () {
       var node = {};
       var addresses = new AddressController(node);
       var req = {
@@ -739,7 +739,7 @@ describe('Addresses', function() {
         noSpent: false
       });
     });
-    it('will return true with value of string "1"', function() {
+    it('will return true with value of string "1"', function () {
       var node = {};
       var addresses = new AddressController(node);
       var req = {
@@ -756,7 +756,7 @@ describe('Addresses', function() {
         noSpent: true
       });
     });
-    it('will return true with value of number "1"', function() {
+    it('will return true with value of number "1"', function () {
       var node = {};
       var addresses = new AddressController(node);
       var req = {
@@ -773,85 +773,85 @@ describe('Addresses', function() {
         noSpent: true
       });
     });
-  }); 
- 
-  describe('#_processingBulk', function() {
+  });
+
+  describe('#_processingBulk', function () {
     var bulk = [
       {
-          pubKeys:[
-              "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec", 
-              "025dd3c2b5465b2f1c9a8b3b51016269a43e6d93dadfd9416c36d83394fc4f6b4b"],
-          reqSigs: 2,
-          index: 1
+        pubKeys: [
+          "033cdf9c7a4724e49982277a70d7de9f47913efc6e4c0137269b1cdd7499315cec",
+          "025dd3c2b5465b2f1c9a8b3b51016269a43e6d93dadfd9416c36d83394fc4f6b4b"],
+        reqSigs: 2,
+        index: 1
       },
       {
-          pubKeys:[
-           "03a83a6de49b6ae1ec89d4734d31e2e6eaf432ea4bfb6b76df6a5759c37cfbdbcc",
-           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-          reqSigs: 2,
-          index: 0
-      },  
+        pubKeys: [
+          "03a83a6de49b6ae1ec89d4734d31e2e6eaf432ea4bfb6b76df6a5759c37cfbdbcc",
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+        reqSigs: 2,
+        index: 0
+      },
       {
-        pubKeys:[ 
-         "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
+        pubKeys: [
+          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
         reqSigs: 2,
         index: 3
       },
       {
-        pubKeys:[ 
+        pubKeys: [
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
         reqSigs: 3,
         index: 2
       },
-      { 
+      {
         reqSigs: 1,
         index: 6
       },
       {
-        pubKeys:[ 
+        pubKeys: [
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
           "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e"],
-          index: 4
+        index: 4
       },
       {
-        pubKeys: 
-          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        pubKeys:
+        "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
         reqSigs: 3,
         index: 5
       },
       {
-        pub_keys: 
-          "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
+        pub_keys:
+        "02f9d566530995c2024c4ca286c1997a470c5a58c076dcd4f366210f65ee33318e",
         reqSigs: 3
       },
-    ] 
+    ]
     var node = {};
     var addresses = new AddressController(node);
 
-    it('should get multisigns invalid', done => {  
-      addresses._processingBulk(bulk).then(function(container){
-        should(container.multisign_not_valid.length).be.exactly(5); 
-        should(container.multisign_not_valid[4].error).be.exactly("incorrect format pubKeys must be Array and reqSigs integer"); 
-        should(container.multisign_not_valid[4].index).be.exactly(5); 
-        should(container.multisign_valid.length).be.exactly(2);  
+    it('should get multisigns invalid', done => {
+      addresses._processingBulk(bulk).then(function (container) {
+        should(container.multisign_not_valid.length).be.exactly(5);
+        should(container.multisign_not_valid[4].error).be.exactly("incorrect format pubKeys must be Array and reqSigs integer");
+        should(container.multisign_not_valid[4].index).be.exactly(5);
+        should(container.multisign_valid.length).be.exactly(2);
         done()
-      }).catch(function(e){
+      }).catch(function (e) {
         return done(e);
       });
     });
 
-    it('should get multisigns valid', done => {  
-        bulk.splice(2,5);
-        addresses._processingBulk(bulk).then(function(container){
-          should(container.multisign_not_valid.length).be.exactly(0);  
-          should(container.multisign_valid.length).be.exactly(2);  
-          should(container.multisign_valid[0].index).be.exactly(0);
-          should(container.multisign_valid[1].index).be.exactly(1); 
-          done()
-        }).catch(function(e){
-          return done(e);
-        });
-    });  
-  });  
+    it('should get multisigns valid', done => {
+      bulk.splice(2, 5);
+      addresses._processingBulk(bulk).then(function (container) {
+        should(container.multisign_not_valid.length).be.exactly(0);
+        should(container.multisign_valid.length).be.exactly(2);
+        should(container.multisign_valid[0].index).be.exactly(0);
+        should(container.multisign_valid[1].index).be.exactly(1);
+        done()
+      }).catch(function (e) {
+        return done(e);
+      });
+    });
+  });
 });
