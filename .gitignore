@@ -27,6 +27,7 @@ npm-debug.log
 .nodemonignore
 
 .DS_Store
+.vscore/*
 db/txs/*
 db/txs
 db/testnet/txs/*
