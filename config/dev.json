@@ -2,5 +2,6 @@
   "firstColoredBlock": 1229200,
   "DBHost": "mongodb://localhost/insignt-lite-cc-dev",
   "network":"litecoin-testnet",
-  "bitcoinLib":"bitcore-lib"
+  "bitcoinLib":"bitcore-lib",
+  "ESTIMATE_FEE_URL": "http://litecoin-testnet.mifiel.co/api/utils/estimatefee?nbBlocks=3"
 }
