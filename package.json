@@ -70,7 +70,7 @@
     "body-parser": "^1.13.3",
     "cc-assetid-encoder": "^0.6.2",
     "cc-transaction": "^1.2.1",
-    "cc-transaction-builder": "git://github.com/genaromadrid/cc-transaction-builder.git#litecoin",
+    "cc-transaction-builder": "git://github.com/genaromadrid/cc-transaction-builder.git#feature/finance-output",
     "chalk": "^2.0.1",
     "commander": "^2.10.0",
     "compression": "^1.6.1",
