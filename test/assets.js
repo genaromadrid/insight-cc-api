@@ -514,7 +514,7 @@ describe.only('AssetController', () => {
         utxos: [],
       };
       const node = {};
-      const buildObject = { txb: { tx: { ins: new Array(1), outs: new Array(30) } } };
+      const buildObject = { txHex: 'tx-hex', assetId: 'asset-id', txb: { tx: { ins: new Array(3), outs: new Array(30) } } };
       const handleToTest = Object.assign({}, handle, { utxos: body.utxos, body });
       const controller = new AssetController(node);
       controller.ccBuildTypes = { issue: () => buildObject };
@@ -525,7 +525,8 @@ describe.only('AssetController', () => {
         controller.common.handleErrors = (err) => { done(err); };
         const res = {
           jsonp: (result) => {
-            should(result.txb.tx.ins.length).be.exactly(1);
+            should(result).have.property('txHex');
+            should(result).have.property('assetId');
             done();
           },
         };
@@ -540,7 +541,7 @@ describe.only('AssetController', () => {
         utxos: [],
       };
       const node = {};
-      const buildObject = { txb: { tx: { ins: new Array(3), outs: new Array(30) } } };
+      const buildObject = { txHex: 'tx-hex', assetId: 'asset-id', txb: { tx: { ins: new Array(3), outs: new Array(30) } } };
       const handleToTest = Object.assign({}, handle, { utxos: utxosToTest, body });
       const controller = new AssetController(node);
       controller.ccBuildTypes = { issue: () => buildObject };
@@ -569,7 +570,7 @@ describe.only('AssetController', () => {
         utxos: [],
       };
       const node = {};
-      const buildObject = { txb: { tx: { ins: new Array(3), outs: new Array(30) } } };
+      const buildObject = { txHex: 'tx-hex', assetId: 'asset-id', txb: { tx: { ins: new Array(3), outs: new Array(30) } } };
       const handleToTest = Object.assign({}, handle, { utxos: utxosToTest, body });
       const controller = new AssetController(node);
       controller.ccBuildTypes = { issue: () => buildObject };

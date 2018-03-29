@@ -2,11 +2,13 @@
 
 process.env.NODE_ENV = 'test';
 
+var config = require('config');
+var bitcore = require(config.bitcoinLib);
 var sinon = require('sinon');
 var should = require('should');
 var AddressController = require('../lib/addresses');
 var _ = require('lodash');
-var bitcore = require('litecore-lib');
+
 
 var txinfos = {
   totalCount: 2,
